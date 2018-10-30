@@ -10,18 +10,36 @@
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="body">
+
+<body class="container-fluid">
     <div id="app">
-        <div class="top_side">
-            
+        <div class="my_search_bar">
+            <input type="text" id="my_input" v-model="search" placeholder="Search your City">
+            <button @click="dataTable">Search</button>
         </div>
-        <div class="middle_side container">
-            
+        <div v-if="search!=''" class="data_display">
+            <div class="title">
+                <div class="mycity">
+                    <h1>{{city}}</h1>
+                </div>
+            </div>
+            <div class="flip3D">
+                <div class="back">
+                    <p>Pressure: {{pressure}} bar</p>
+                    <p>Humidity: {{allInfo.humidity}} %</p>
+                    <p>Maximum Temperature: {{maxTemp}} &#8451;</p>
+                    <p>Minimum Temperature: {{minTemp}} &#8451;</p>
+                    <p>Wind-speed: {{windSpeed}} km/h</p>
+                </div>
+                <div class="front">
+                    <h2 v-if="temperature!=0">{{temperature}} &#8451;</h2>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>
 
 </html>
