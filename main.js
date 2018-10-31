@@ -2,13 +2,18 @@ var app = new Vue({
     el: "#app",
     data: {
         allInfo: [],
+        humidity: 0,
+        available: true,
         search: '',
         temperature: 0,
         minTemp: 0,
         maxTemp: 0,
+        clear: "clear_sky.jpg",
         windSpeed: 0,
         pressure: 0,
-        city:'',
+        mainWeather: '',
+        weather: '',
+        city: '',
         myResponse: [],
     },
 
@@ -25,32 +30,35 @@ var app = new Vue({
 
                 })
                 .then(function (response) {
-                    console.log(response)
+                    console.log(response);
                     app.updateSearch(response);
-                    
-//                    console.log(app.myResponse);
                 })
-                .catch(error => alert(error));
+                .catch(error => alert("Sorry, couldn't find your city"));
         },
 
         updateSearch: function (response) {
-            let temperature = response.main.temp;
-            let newTemperature = temperature-273.15;
+            let allInfo = response.main;
+            let temperature = allInfo.temp;
+            let newTemperature = temperature - 273.15;
             app.temperature = newTemperature.toFixed();
-            let minimumTemp = response.main.temp_min;
-            let newMinTemp = minimumTemp-273.15;
+            let minimumTemp = allInfo.temp_min;
+            let newMinTemp = minimumTemp - 273.15;
             app.minTemp = newMinTemp.toFixed();
-            let maximumTemp = response.main.temp_max;
-            let newMaxTemp = maximumTemp-273.15;
+            let maximumTemp = allInfo.temp_max;
+            let newMaxTemp = maximumTemp - 273.15;
             app.maxTemp = newMaxTemp.toFixed();
-            let pressure = response.main.pressure;
-            let newPressure = pressure/1000;
+            let pressure = allInfo.pressure;
+            let newPressure = pressure / 1000;
+            let weather = response.weather[0].description;
+            let mainWeather = response.weather[0].main;
+            app.mainWeather = mainWeather;
+            app.weather = weather;
             app.pressure = newPressure;
-            app.myResponse = response; 
+            app.myResponse = response;
             app.city = response.name;
-            app.allInfo= response.main;
-            app.windSpeed= response.wind.speed;
-            
+            app.humidity = allInfo.humidity;
+            app.windSpeed = response.wind.speed;
+
         },
     }
 

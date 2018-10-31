@@ -12,31 +12,67 @@
 </head>
 
 <body class="container-fluid">
+    
+    
     <div id="app">
         <div class="my_search_bar">
             <input type="text" id="my_input" v-model="search" placeholder="Search your City">
-            <button @click="dataTable">Search</button>
+            <button class="myButton" @click="dataTable">Search</button>
         </div>
-        <div v-if="search!=''" class="data_display">
+        <div v-if="city==''" class="welcome">
+            <div>
+                <h1>Welcome to WeatherZoo</h1>
+            </div>
+        </div>
+        <div v-else-if="city!=''" class="data_display">
             <div class="title">
                 <div class="mycity">
-                    <h1>{{city}}</h1>
+                    <h1>{{city}}
+                    <img id="title_icon" v-if="mainWeather == 'Drizzle'" src="umbrella-and-raindrops.png">
+                    <img id="title_icon" v-if="mainWeather == 'Clear'" src="sun.png">
+                    <img id="title_icon" v-if="mainWeather == 'Rain'" src="rain.png">
+                    <img id="title_icon" v-if="mainWeather == 'Thunderstorm'" src="energy.png">
+                    <img id="title_icon" v-if="mainWeather == 'Snow'" src="snowflake-shape.png">
+                    <img id="title_icon" v-if="mainWeather == 'Clouds'" src="mobileme-logo-of-black-cloud.png">
+                    <img id="title_icon" v-if="mainWeather == 'Atmosphere'" src="haze.png">
+                        
+                    </h1>                   
                 </div>
-            </div>
-            <div class="flip3D">
+            </div>        
+            <div v-if="city!=''" class="flip3D">
                 <div class="back">
                     <p>Pressure: {{pressure}} bar</p>
-                    <p>Humidity: {{allInfo.humidity}} %</p>
+                    <p>Humidity: {{humidity}} %</p>
                     <p>Maximum Temperature: {{maxTemp}} &#8451;</p>
                     <p>Minimum Temperature: {{minTemp}} &#8451;</p>
                     <p>Wind-speed: {{windSpeed}} km/h</p>
                 </div>
-                <div class="front">
-                    <h2 v-if="temperature!=0">{{temperature}} &#8451;</h2>
+                <div id="front_image" class="front" v-bind:class="{available:available}">
+                    <div class="my_temp">
+                        <h2 v-if="temperature!=0">{{temperature}} &#8451;</h2>
+                    </div>
+                    <div class="my_description">
+                        <p>{{weather}}
+                        <img id="weather_icon" v-if="mainWeather == 'Drizzle'" src="http://openweathermap.org/img/w/09d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Rain'" src="http://openweathermap.org/img/w/10d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Thunderstorm'" src="http://openweathermap.org/img/w/11d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Snow'" src="http://openweathermap.org/img/w/13d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Clear'" src="http://openweathermap.org/img/w/01d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Clouds'" src="http://openweathermap.org/img/w/02d.png">
+                        <img id="weather_icon" v-if="mainWeather == 'Atmosphere'" src="http://openweathermap.org/img/w/50d.png">
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div v-else class="myDivHeight">
+        
+        </div>
+        </div>
+    
+    <div class="bot_side">
+            <img src="copyright.png" class="copyright"><p class="bottom_text">WeatherZoo | All Rights Reserved</p>
+    </div>  
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
