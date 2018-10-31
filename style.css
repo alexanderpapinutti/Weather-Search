@@ -84,6 +84,14 @@ body {
     
 }
 
+
+.Cloud{
+    background-image:url(clear_sky.jpg);
+}
+.image {
+    
+}
+
 .flip3D:hover > .front{
     transform: perspective(600px) rotateY(-180deg);
 }
@@ -121,8 +129,16 @@ body {
     justify-content: center;
 }
 
+span{
+
+}
+
 #my_input{
     border-radius: 7px;
+}
+
+.Clear {
+    background-image: url(clear_sky.jpg);
 }
 
 .available{

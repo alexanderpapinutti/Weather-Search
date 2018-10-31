@@ -8,13 +8,13 @@ var app = new Vue({
         temperature: 0,
         minTemp: 0,
         maxTemp: 0,
-        clear: "clear_sky.jpg",
         windSpeed: 0,
         pressure: 0,
         mainWeather: '',
         weather: '',
         city: '',
         myResponse: [],
+        image: '',
     },
 
     methods: {
@@ -32,8 +32,9 @@ var app = new Vue({
                 .then(function (response) {
                     console.log(response);
                     app.updateSearch(response);
+//                    app.updateClass(this.mainWeather);
                 })
-                .catch(error => alert("Sorry, couldn't find your city"));
+                .catch(error => alert(error));
         },
 
         updateSearch: function (response) {
@@ -60,6 +61,27 @@ var app = new Vue({
             app.windSpeed = response.wind.speed;
 
         },
+
+//        updateClass: function (weather) {
+//            if (weather == "Clear") {
+//               app.image="clear_sky.jpg";
+//            }else if(weather == "Thunderstorm"){
+//                app.image="storm.jpg";
+//            }else if(weather = "Snow"){
+//                app.image="snow.jpg";
+//            }else if(weather = "Rain"){
+//                app.image="rainin.jpg";
+//            }else if(weather = "Atmosphere"){
+//                app.image="fog.jpg";
+//            }else if(weather = "Drizzle"){
+//                app.image="drizzle.jpg"
+//            }else if(weather == "Clouds"){
+//                app.image="cloudy.jpg"
+//            }else{   
+//            }
+           
+            
+//        },
     }
 
 });
